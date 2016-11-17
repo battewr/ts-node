@@ -3,7 +3,7 @@ Simple Typescript project for bootstrapping NodeJs/Express application
 ###Installation
 ```
 npm install
-npm tsc
-node ./dist/www.js
+npm run tsc
+npm start
 ```
 Port of the Express CLI default project using Typescript but without Views.

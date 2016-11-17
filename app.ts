@@ -27,7 +27,7 @@ export class Application{
     }
 
     finalErrorHandleCatch(err:any, req:express.Request, res:express.Response, next:express.NextFunction){
-        let error:any = req.app.get('env') === 'development'? err.toString() : "Failed";
+        let error:string = req.app.get('env') === 'development'? err.toString() : "Failed";
         res.status(err.status || 500);
         res.send(error);
     }
