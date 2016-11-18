@@ -3,7 +3,10 @@ import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as path from 'path';
 import {RestfulError} from './ErrorWrapper'
-import {IndexRoute}from'./routes/Index'
+import {DbExecutionWrapper}from'./lib/db';
+
+import {IndexRoute}from'./routes/index'
+import {TaskRoute}from'./routes/task'
 
 export class Application{
     private val:number = 10;
@@ -13,8 +16,12 @@ export class Application{
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({extended: false}));
 
+        let dbWrapper = new DbExecutionWrapper();
+
         let indexRoute = new IndexRoute();
+        let taskRoute = new TaskRoute(dbWrapper);
         app.use('/', indexRoute.attach());
+        app.use('/task', taskRoute.attach());
 
         app.use(this.notFoundHandler);
         app.use(this.finalErrorHandleCatch.bind(this));
