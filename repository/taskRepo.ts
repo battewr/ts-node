@@ -17,7 +17,7 @@ export class TaskRepository{
 
     public insertTask(newTicket:Ticket):Promise<Ticket>{
         newTicket.id = uuid.v4();
-        const sql:string = 'insert into task values(?,?,?)';
+        const sql:string = 'insert into task (id, description, title) values(?,?,?)';
         let params = new Array<string>();
         params.push(newTicket.id);
         params.push(newTicket.description);
