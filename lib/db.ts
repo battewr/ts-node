@@ -8,7 +8,7 @@ export class DbExecutionWrapper{
             connectionLimit: 10,
             host: 'localhost',
             user: 'todo_usr',
-            password: '******',
+            password: '****',
             database: 'todo'
         });
     }

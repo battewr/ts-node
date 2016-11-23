@@ -9,6 +9,12 @@ export class TaskRepository{
         this._db = db;
     }
 
+    // public getTaskCount():Promise<Number>{
+    //     return new Promise((resolve, reject)=>{
+
+    //     });
+    // }
+
     public insertTask(newTicket:Ticket):Promise<Ticket>{
         newTicket.id = uuid.v4();
         const sql:string = 'insert into task values(?,?,?)';
@@ -63,7 +69,7 @@ export class TaskRepository{
                             reject({status:404, reason:"not found"});
                         }
                         // id is a primary key, there can only be 1
-                        let row = new Ticket(new Ticket(rows[0]));
+                        let row = new Ticket(rows[0]);
                         resolve(row);
                     })
                 .catch((err)=>{reject({status:500, reason:err})});

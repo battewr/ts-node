@@ -18,6 +18,7 @@ export class TaskRoute {
     }
 
     private end(pr: Promise<any>, res: express.Response) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
         if (!pr) {
             res.status(500);
             res.send("invalid promise state!");
