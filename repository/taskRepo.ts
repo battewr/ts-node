@@ -15,6 +15,22 @@ export class TaskRepository{
     //     });
     // }
 
+    public deleteTask(id:string):Promise<any>{
+        const sql:string = "delete from task where id = ?";
+        let params = new Array<string>();
+        params.push(id);
+
+        return new Promise((resolve, reject)=>{
+            this._db.queryPromiseWrapperValues(sql, params).then((rows:any)=>{
+                if(rows.affectedRows < 1){
+                    reject({status:500, reason: "delete failed, no rows affected"});
+                }else{
+                    resolve({result: "ok"});
+                }
+            }).catch((err)=>{reject({status:500, reason: err})});
+        });
+    }
+
     public insertTask(newTicket:Ticket):Promise<Ticket>{
         newTicket.id = uuid.v4();
         const sql:string = 'insert into task (id, description, title) values(?,?,?)';
@@ -29,8 +45,9 @@ export class TaskRepository{
                     {
                         if(rows.affectedRows < 1){
                             reject({status:500, reason:"insert failed"});
+                        }else{
+                            resolve(newTicket);
                         }
-                        resolve(newTicket);
                     })
                 .catch((err)=>{reject({status:500, reason:err})});
         });
