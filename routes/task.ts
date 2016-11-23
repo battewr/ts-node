@@ -48,7 +48,6 @@ export class TaskRoute {
 
     private insertNewTicket(req: express.Request, res: express.Response, next: express.NextFunction) {
         let body: Ticket = req.body;
-        console.log(JSON.stringify(body));
         this.end(this._taskRepo.insertTask(body), res);
     }
 
