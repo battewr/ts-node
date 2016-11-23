@@ -11,7 +11,7 @@ export class TaskRoute {
     }
     public attach(): express.Router {
         let router = express.Router();
-        router.put('/', this.insertNewTicket.bind(this));
+        router.post('/', this.insertNewTicket.bind(this));
         router.get('/:id', this.getTicketAction.bind(this));
         router.get('/', this.getTicketList.bind(this));
         router.delete('/:id', this.deleteTicket.bind(this));
